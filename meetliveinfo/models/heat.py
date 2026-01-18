@@ -14,7 +14,7 @@ class BaseAthlete(BaseModel):
     clubtext: str
     clubname: str
     clubcode: str
-    entrytime: float
+    entrytime: str
     agetext: str
     nametext: str
 
@@ -26,7 +26,7 @@ class BaseAthlete(BaseModel):
 
 class Result(BaseAthlete):
     heatplace: int
-    swimtime: float
+    swimtime: str
     points: int
     splits: Optional[Dict[str, str]] = None
     qualcode: Optional[str] = None
