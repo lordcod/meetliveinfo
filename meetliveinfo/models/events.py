@@ -26,8 +26,15 @@ class HeatInfo(BaseModel):
 class EventHeat(BaseModel):
     heatinfo: HeatInfo
     status: HeatStatus
-    id: Optional[str] = None
-    code: Optional[str] = None
+    id: int
+    code: int
+
+    @field_validator("id", "code", mode="before")
+    @classmethod
+    def parse_int(cls, v):
+        if v in (None, ""):
+            return None
+        return int(v)
 
     @field_validator("status", mode="before")
     @classmethod

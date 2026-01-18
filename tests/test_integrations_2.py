@@ -54,14 +54,9 @@ def test_get_heat_if_exists(client: HTTPClient):
     events = client.get_events()
 
     for ev in events.events:
-        try:
-            heat = client.get_heat(ev.number, 1)
+        for heat in ev.heats:
+            heat = client.get_heat(ev.number, heat.code)
             assert isinstance(heat, HeatResultResponse)
-            return
-        except Exception:
-            continue
-
-    pytest.skip("No heats available")
 
 
 def test_get_heat_by_id_if_exists(client: HTTPClient):
@@ -70,11 +65,10 @@ def test_get_heat_by_id_if_exists(client: HTTPClient):
     for ev in events.events:
         try:
             heat = client.get_heat(ev.number, 1)
-            heat_id = getattr(heat, "heatid", None)
-            if heat_id is not None:
-                heat_by_id = client.get_heat_by_id(heat_id)
-                assert isinstance(heat_by_id, HeatResultResponse)
-                return
+            heat_id = heat.id
+            heat_by_id = client.get_heat_by_id(heat_id)
+            assert isinstance(heat_by_id, HeatResultResponse)
+            return
         except Exception:
             continue
 
