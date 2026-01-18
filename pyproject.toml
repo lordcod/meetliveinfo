@@ -1,6 +1,6 @@
 [project]
 name = "meetliveinfo"
-version = "0.1.1"
+version = "0.0.0"
 description = "Python client for Splash Meet Manager Live Info Server (HTTP/UDP)"
 authors = [
     { name = "LordCode", email = "9999269010dddd@gmail.com" }
